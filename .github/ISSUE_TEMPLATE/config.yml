@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Ask a Question / Start a Discussion
+    url: https://github.com/AKXtreme/iqub/discussions
+    about: For questions, ideas, and general discussion — use GitHub Discussions.
+
+  - name: Read the Contributing Guide
+    url: https://github.com/AKXtreme/iqub/blob/main/CONTRIBUTING.md
+    about: Want to contribute? Start here — it covers everything you need to know.
+
+  - name: Security Vulnerability
+    url: https://github.com/AKXtreme/iqub/security/advisories/new
+    about: Please report security vulnerabilities privately, not as public issues.
