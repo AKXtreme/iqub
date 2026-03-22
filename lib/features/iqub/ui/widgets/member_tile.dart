@@ -68,9 +68,13 @@ class MemberTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      member.name,
-                      style: Theme.of(context).textTheme.titleMedium,
+                    Flexible(
+                      child: Text(
+                        member.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                     ),
                     if (isCurrentPayout) ...[
                       const SizedBox(width: 8),
