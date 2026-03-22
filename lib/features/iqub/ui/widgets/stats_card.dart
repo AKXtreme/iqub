@@ -49,15 +49,24 @@ class StatsCard extends StatelessWidget {
             child: Icon(icon, color: cardColor, size: 20),
           ),
           const SizedBox(height: 12),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
             ),
           ),
           const SizedBox(height: 2),
-          Text(label, style: Theme.of(context).textTheme.bodyMedium),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
           if (subtitle != null) ...[
             const SizedBox(height: 2),
             Text(
@@ -65,6 +74,8 @@ class StatsCard extends StatelessWidget {
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(fontSize: 11, color: cardColor),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ],
         ],
