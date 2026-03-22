@@ -58,11 +58,11 @@ It is practiced across the world under many names:
 
 ## 📸 Screenshots
 
-> Want to help? Add screenshots by contributing to [this issue](#).
+> More screenshots welcome — contribute via a PR!
 
-| Login | Home | Iqub Detail | Payments |
-|---|---|---|---|
-| *coming soon* | *coming soon* | *coming soon* | *coming soon* |
+| Register | Home | Create Iqub |
+|---|---|---|
+| ![Register](docs/screenshots/1.png) | ![Home](docs/screenshots/2.png) | ![Create Iqub](docs/screenshots/3.png) |
 
 ---
 
