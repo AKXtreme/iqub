@@ -28,27 +28,31 @@ jobs:
       - name: Create placeholder firebase_options.dart
         run: |
           cat > lib/firebase_options.dart << 'EOF'
-          import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
-          import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, TargetPlatform;
-          class DefaultFirebaseOptions {
-            static FirebaseOptions get currentPlatform => android;
-            static const FirebaseOptions android = FirebaseOptions(
-              apiKey: 'ci-placeholder',
-              appId: '1:000000000000:android:0000000000000000',
-              messagingSenderId: '000000000000',
-              projectId: 'ci-placeholder',
-              storageBucket: 'ci-placeholder.appspot.com',
-            );
-            static const FirebaseOptions ios = FirebaseOptions(
-              apiKey: 'ci-placeholder',
-              appId: '1:000000000000:ios:0000000000000000',
-              messagingSenderId: '000000000000',
-              projectId: 'ci-placeholder',
-              storageBucket: 'ci-placeholder.appspot.com',
-              iosBundleId: 'com.iqub.iqub',
-            );
-          }
-          EOF
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform => android;
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'ci-placeholder',
+    appId: '1:000000000000:android:0000000000000000',
+    messagingSenderId: '000000000000',
+    projectId: 'ci-placeholder',
+    storageBucket: 'ci-placeholder.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'ci-placeholder',
+    appId: '1:000000000000:ios:0000000000000000',
+    messagingSenderId: '000000000000',
+    projectId: 'ci-placeholder',
+    storageBucket: 'ci-placeholder.appspot.com',
+    iosBundleId: 'com.iqub.iqub',
+  );
+}
+EOF
 
       - name: Check formatting
         run: dart format --output=none --set-exit-if-changed lib/ test/
@@ -87,27 +91,31 @@ jobs:
       - name: Create placeholder firebase_options.dart
         run: |
           cat > lib/firebase_options.dart << 'EOF'
-          import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
-          import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, TargetPlatform;
-          class DefaultFirebaseOptions {
-            static FirebaseOptions get currentPlatform => android;
-            static const FirebaseOptions android = FirebaseOptions(
-              apiKey: 'ci-placeholder',
-              appId: '1:000000000000:android:0000000000000000',
-              messagingSenderId: '000000000000',
-              projectId: 'ci-placeholder',
-              storageBucket: 'ci-placeholder.appspot.com',
-            );
-            static const FirebaseOptions ios = FirebaseOptions(
-              apiKey: 'ci-placeholder',
-              appId: '1:000000000000:ios:0000000000000000',
-              messagingSenderId: '000000000000',
-              projectId: 'ci-placeholder',
-              storageBucket: 'ci-placeholder.appspot.com',
-              iosBundleId: 'com.iqub.iqub',
-            );
-          }
-          EOF
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform => android;
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'ci-placeholder',
+    appId: '1:000000000000:android:0000000000000000',
+    messagingSenderId: '000000000000',
+    projectId: 'ci-placeholder',
+    storageBucket: 'ci-placeholder.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'ci-placeholder',
+    appId: '1:000000000000:ios:0000000000000000',
+    messagingSenderId: '000000000000',
+    projectId: 'ci-placeholder',
+    storageBucket: 'ci-placeholder.appspot.com',
+    iosBundleId: 'com.iqub.iqub',
+  );
+}
+EOF
 
       - name: Build APK (debug)
         run: flutter build apk --debug
