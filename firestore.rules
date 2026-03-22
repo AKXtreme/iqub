@@ -7,27 +7,27 @@ service cloud.firestore {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
 
-    // Iqub groups: only the owner can read/write
+    // Iqub groups: only the admin can read/write
     match /iqubs/{iqubId} {
-      allow read, write: if request.auth != null && request.auth.uid == resource.data.ownerId;
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.ownerId;
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.adminId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.adminId;
 
       // Members sub-collection
       match /members/{memberId} {
         allow read, write: if request.auth != null &&
-          request.auth.uid == get(/databases/$(database)/documents/iqubs/$(iqubId)).data.ownerId;
+          request.auth.uid == get(/databases/$(database)/documents/iqubs/$(iqubId)).data.adminId;
       }
 
       // Payments sub-collection
       match /payments/{paymentId} {
         allow read, write: if request.auth != null &&
-          request.auth.uid == get(/databases/$(database)/documents/iqubs/$(iqubId)).data.ownerId;
+          request.auth.uid == get(/databases/$(database)/documents/iqubs/$(iqubId)).data.adminId;
       }
 
       // Payouts sub-collection
       match /payouts/{payoutId} {
         allow read, write: if request.auth != null &&
-          request.auth.uid == get(/databases/$(database)/documents/iqubs/$(iqubId)).data.ownerId;
+          request.auth.uid == get(/databases/$(database)/documents/iqubs/$(iqubId)).data.adminId;
       }
     }
   }
