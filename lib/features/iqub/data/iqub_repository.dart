@@ -36,11 +36,13 @@ class IqubRepository {
 
   /// Stream of all Iqub groups where the current user is admin or member
   Stream<List<IqubModel>> watchMyIqubs() {
-    return _iqubs
-        .where('memberIds', arrayContains: _uid)
-        .orderBy('createdAt', descending: true)
-        .snapshots()
-        .map((snap) => snap.docs.map(IqubModel.fromDoc).toList());
+    return _iqubs.where('memberIds', arrayContains: _uid).snapshots().map((
+      snap,
+    ) {
+      final list = snap.docs.map(IqubModel.fromDoc).toList();
+      list.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      return list;
+    });
   }
 
   /// Stream of a single Iqub group
