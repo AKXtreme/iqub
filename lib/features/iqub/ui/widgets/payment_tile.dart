@@ -22,19 +22,24 @@ class PaymentTile extends StatelessWidget {
     final isPaid = payment.isPaid;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.divider),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: isPaid
+              ? AppColors.success.withValues(alpha: 0.3)
+              : AppColors.divider,
+        ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Status icon
           Container(
-            width: 40,
-            height: 40,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
               color: isPaid
                   ? AppColors.success.withValues(alpha: 0.12)
@@ -42,29 +47,34 @@ class PaymentTile extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Icon(
-              isPaid ? Icons.check_rounded : Icons.close_rounded,
+              isPaid ? Icons.check_rounded : Icons.schedule_rounded,
               color: isPaid ? AppColors.success : AppColors.error,
               size: 20,
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
 
           // Member name + details
           Expanded(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   payment.memberName,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 3),
                 Text(
                   isPaid
                       ? 'Paid ${payment.paidAt?.relative ?? ''}'
                       : 'Due ${payment.dueDate.formatted}',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isPaid ? AppColors.success : AppColors.error,
+                    color: isPaid ? AppColors.success : AppColors.textSecondary,
                     fontSize: 12,
                   ),
                 ),
@@ -72,8 +82,9 @@ class PaymentTile extends StatelessWidget {
             ),
           ),
 
-          // Amount
+          // Amount + toggle
           Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
@@ -83,19 +94,32 @@ class PaymentTile extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Toggle paid/unpaid (admin only)
-              if (isAdmin && onToggle != null)
+              if (isAdmin && onToggle != null) ...[
+                const SizedBox(height: 4),
                 GestureDetector(
                   onTap: onToggle,
-                  child: Text(
-                    isPaid ? 'Mark unpaid' : 'Mark paid',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: isPaid ? AppColors.error : AppColors.success,
-                      fontWeight: FontWeight.w600,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isPaid
+                          ? AppColors.error.withValues(alpha: 0.1)
+                          : AppColors.success.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      isPaid ? 'Mark unpaid' : 'Mark paid',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: isPaid ? AppColors.error : AppColors.success,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
+              ],
             ],
           ),
         ],
