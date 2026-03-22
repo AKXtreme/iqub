@@ -60,9 +60,9 @@ It is practiced across the world under many names:
 
 > More screenshots welcome — contribute via a PR!
 
-| Register | Home | Create Iqub |
-|---|---|---|
-| ![Register](docs/screenshots/1.png) | ![Home](docs/screenshots/2.png) | ![Create Iqub](docs/screenshots/3.png) |
+| Register | Home | Create Iqub | Iqub Detail |
+|---|---|---|---|
+| ![Register](docs/screenshots/1.png) | ![Home](docs/screenshots/2.png) | ![Create Iqub](docs/screenshots/3.png) | ![Iqub Detail](docs/screenshots/4.png) |
 
 ---
 
