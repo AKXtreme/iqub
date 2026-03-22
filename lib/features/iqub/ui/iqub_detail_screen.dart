@@ -487,25 +487,17 @@ class _CurrentRoundCard extends StatelessWidget {
           ],
           if (isAdmin) ...[
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomButton(
-                    label: 'Track Payments',
-                    variant: ButtonVariant.outlined,
-                    onPressed: onTrackPayments,
-                    icon: Icons.payment_rounded,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: CustomButton(
-                    label: 'Record Payout',
-                    onPressed: payoutMember != null ? onRecordPayout : null,
-                    icon: Icons.send_rounded,
-                  ),
-                ),
-              ],
+            CustomButton(
+              label: 'Track Payments',
+              variant: ButtonVariant.outlined,
+              onPressed: onTrackPayments,
+              icon: Icons.payment_rounded,
+            ),
+            const SizedBox(height: 10),
+            CustomButton(
+              label: 'Record Payout',
+              onPressed: payoutMember != null ? onRecordPayout : null,
+              icon: Icons.send_rounded,
             ),
           ],
         ],
