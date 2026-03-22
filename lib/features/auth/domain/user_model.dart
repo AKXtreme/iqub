@@ -32,28 +32,27 @@ class UserModel extends Equatable {
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'phone': phone,
-        'photoUrl': photoUrl,
-        'createdAt': Timestamp.fromDate(createdAt),
-      };
+    'id': id,
+    'name': name,
+    'email': email,
+    'phone': phone,
+    'photoUrl': photoUrl,
+    'createdAt': Timestamp.fromDate(createdAt),
+  };
 
   UserModel copyWith({
     String? name,
     String? email,
     String? phone,
     String? photoUrl,
-  }) =>
-      UserModel(
-        id: id,
-        name: name ?? this.name,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        photoUrl: photoUrl ?? this.photoUrl,
-        createdAt: createdAt,
-      );
+  }) => UserModel(
+    id: id,
+    name: name ?? this.name,
+    email: email ?? this.email,
+    phone: phone ?? this.phone,
+    photoUrl: photoUrl ?? this.photoUrl,
+    createdAt: createdAt,
+  );
 
   @override
   List<Object?> get props => [id, name, email, phone, photoUrl, createdAt];

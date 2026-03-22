@@ -47,10 +47,7 @@ class AuthRepository {
   }
 
   /// Sign in with email and password
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signIn({required String email, required String password}) async {
     await _auth.signInWithEmailAndPassword(
       email: email.trim(),
       password: password,
@@ -73,9 +70,10 @@ class AuthRepository {
   Stream<UserModel?> watchCurrentUser() {
     final uid = _auth.currentUser?.uid;
     if (uid == null) return const Stream.empty();
-    return _users.doc(uid).snapshots().map(
-          (doc) => doc.exists ? UserModel.fromDoc(doc) : null,
-        );
+    return _users
+        .doc(uid)
+        .snapshots()
+        .map((doc) => doc.exists ? UserModel.fromDoc(doc) : null);
   }
 }
 

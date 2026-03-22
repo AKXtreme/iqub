@@ -23,13 +23,11 @@ class IqubDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final iqubAsync = ref.watch(iqubProvider(iqubId));
     final membersAsync = ref.watch(membersProvider(iqubId));
-    final currentUserId =
-        ref.watch(authStateProvider).valueOrNull?.uid ?? '';
+    final currentUserId = ref.watch(authStateProvider).valueOrNull?.uid ?? '';
 
     return iqubAsync.when(
-      loading: () => const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
         body: ErrorView(message: 'Failed to load Iqub details.'),
@@ -58,7 +56,9 @@ class IqubDetailScreen extends ConsumerWidget {
                   title: Text(
                     iqub.name,
                     style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   background: Container(
                     decoration: const BoxDecoration(
@@ -69,8 +69,11 @@ class IqubDetailScreen extends ConsumerWidget {
                       ),
                     ),
                     child: const Center(
-                      child: Icon(Icons.savings_rounded,
-                          color: Colors.white30, size: 80),
+                      child: Icon(
+                        Icons.savings_rounded,
+                        color: Colors.white30,
+                        size: 80,
+                      ),
                     ),
                   ),
                 ),
@@ -78,8 +81,13 @@ class IqubDetailScreen extends ConsumerWidget {
                   if (isAdmin)
                     PopupMenuButton<String>(
                       icon: const Icon(Icons.more_vert, color: Colors.white),
-                      onSelected: (v) =>
-                          _handleMenu(context, ref, v, iqub, membersAsync.valueOrNull ?? []),
+                      onSelected: (v) => _handleMenu(
+                        context,
+                        ref,
+                        v,
+                        iqub,
+                        membersAsync.valueOrNull ?? [],
+                      ),
                       itemBuilder: (_) => [
                         const PopupMenuItem(
                           value: 'members',
@@ -133,12 +141,14 @@ class IqubDetailScreen extends ConsumerWidget {
                         onTrackPayments: () => context.push(
                           AppRoutes.payments
                               .replaceFirst(':id', iqubId)
-                              .replaceFirst(
-                                  ':round', '${iqub.currentRound}'),
+                              .replaceFirst(':round', '${iqub.currentRound}'),
                         ),
                         onRecordPayout: () => _recordPayout(
-                            context, ref, iqub,
-                            membersAsync.valueOrNull ?? []),
+                          context,
+                          ref,
+                          iqub,
+                          membersAsync.valueOrNull ?? [],
+                        ),
                       ),
                       const SizedBox(height: 20),
 
@@ -148,8 +158,7 @@ class IqubDetailScreen extends ConsumerWidget {
                         action: isAdmin
                             ? TextButton.icon(
                                 onPressed: () => context.push(
-                                  AppRoutes.members
-                                      .replaceFirst(':id', iqubId),
+                                  AppRoutes.members.replaceFirst(':id', iqubId),
                                 ),
                                 icon: const Icon(Icons.edit_outlined, size: 16),
                                 label: const Text('Manage'),
@@ -159,19 +168,21 @@ class IqubDetailScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
 
                       membersAsync.when(
-                        loading: () => const Center(
-                            child: CircularProgressIndicator()),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
                         error: (e, _) => const ErrorView(
                           message: 'Failed to load members.',
                           compact: true,
                         ),
                         data: (members) => Column(
                           children: members
-                              .map((m) => MemberTile(
-                                    member: m,
-                                    isCurrentPayout:
-                                        m.id == iqub.currentPayoutMemberId,
-                                  ))
+                              .map(
+                                (m) => MemberTile(
+                                  member: m,
+                                  isCurrentPayout:
+                                      m.id == iqub.currentPayoutMemberId,
+                                ),
+                              )
                               .toList(),
                         ),
                       ),
@@ -186,8 +197,7 @@ class IqubDetailScreen extends ConsumerWidget {
                               label: 'Payment History',
                               variant: ButtonVariant.outlined,
                               onPressed: () => context.push(
-                                AppRoutes.history
-                                    .replaceFirst(':id', iqubId),
+                                AppRoutes.history.replaceFirst(':id', iqubId),
                               ),
                               icon: Icons.history_rounded,
                             ),
@@ -216,8 +226,13 @@ class IqubDetailScreen extends ConsumerWidget {
     );
   }
 
-  void _handleMenu(BuildContext context, WidgetRef ref, String action,
-      IqubModel iqub, List<MemberModel> members) {
+  void _handleMenu(
+    BuildContext context,
+    WidgetRef ref,
+    String action,
+    IqubModel iqub,
+    List<MemberModel> members,
+  ) {
     switch (action) {
       case 'members':
         context.push(AppRoutes.members.replaceFirst(':id', iqubId));
@@ -235,8 +250,12 @@ class IqubDetailScreen extends ConsumerWidget {
     }
   }
 
-  Future<void> _recordPayout(BuildContext context, WidgetRef ref,
-      IqubModel iqub, List<MemberModel> members) async {
+  Future<void> _recordPayout(
+    BuildContext context,
+    WidgetRef ref,
+    IqubModel iqub,
+    List<MemberModel> members,
+  ) async {
     final recipient = members.firstWhere(
       (m) => m.id == iqub.currentPayoutMemberId,
       orElse: () => members.first,
@@ -272,9 +291,11 @@ class IqubDetailScreen extends ConsumerWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(success
-              ? 'Payout recorded! Round ${iqub.currentRound + 1} started.'
-              : 'Failed to record payout.'),
+          content: Text(
+            success
+                ? 'Payout recorded! Round ${iqub.currentRound + 1} started.'
+                : 'Failed to record payout.',
+          ),
           backgroundColor: success ? AppColors.success : AppColors.error,
         ),
       );
@@ -320,7 +341,10 @@ class _StatusChip extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-                color: color, fontWeight: FontWeight.w600, fontSize: 13),
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+            ),
           ),
         ],
       ),
@@ -397,19 +421,23 @@ class _CurrentRoundCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.success.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-              color: AppColors.success.withValues(alpha: 0.3)),
+          border: Border.all(color: AppColors.success.withValues(alpha: 0.3)),
         ),
         child: const Row(
           children: [
-            Icon(Icons.check_circle_rounded,
-                color: AppColors.success, size: 32),
+            Icon(
+              Icons.check_circle_rounded,
+              color: AppColors.success,
+              size: 32,
+            ),
             SizedBox(width: 12),
             Expanded(
               child: Text(
                 'This Iqub has completed all rounds!',
                 style: TextStyle(
-                    color: AppColors.success, fontWeight: FontWeight.w600),
+                  color: AppColors.success,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
@@ -436,11 +464,12 @@ class _CurrentRoundCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Round ${iqub.currentRound}',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: AppColors.primary)),
+          Text(
+            'Round ${iqub.currentRound}',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(color: AppColors.primary),
+          ),
           const SizedBox(height: 4),
           Text(
             'Next payout: ${payoutMember?.name ?? 'TBD'}',
@@ -451,9 +480,9 @@ class _CurrentRoundCard extends StatelessWidget {
             Text(
               'Amount: ETB ${NumberFormat('#,###').format(iqub.totalPerRound)}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
-                  ),
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
           ],
           if (isAdmin) ...[

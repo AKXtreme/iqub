@@ -11,11 +11,7 @@ import 'widgets/payment_tile.dart';
 import 'widgets/stats_card.dart';
 
 class PaymentsScreen extends ConsumerWidget {
-  const PaymentsScreen({
-    super.key,
-    required this.iqubId,
-    required this.round,
-  });
+  const PaymentsScreen({super.key, required this.iqubId, required this.round});
 
   final String iqubId;
   final int round;
@@ -27,13 +23,10 @@ class PaymentsScreen extends ConsumerWidget {
       paymentsForRoundProvider((iqubId: iqubId, round: round)),
     );
     final membersAsync = ref.watch(membersProvider(iqubId));
-    final currentUserId =
-        ref.watch(authStateProvider).valueOrNull?.uid ?? '';
+    final currentUserId = ref.watch(authStateProvider).valueOrNull?.uid ?? '';
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Round $round Payments'),
-      ),
+      appBar: AppBar(title: Text('Round $round Payments')),
       body: iqubAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => const ErrorView(message: 'Failed to load data.'),
@@ -45,8 +38,7 @@ class PaymentsScreen extends ConsumerWidget {
           final isAdmin = iqub.adminId == currentUserId;
 
           return paymentsAsync.when(
-            loading: () =>
-                const Center(child: CircularProgressIndicator()),
+            loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, _) =>
                 const ErrorView(message: 'Failed to load payments.'),
             data: (payments) {
@@ -61,8 +53,7 @@ class PaymentsScreen extends ConsumerWidget {
                 );
               }
 
-              final paidCount =
-                  payments.where((p) => p.isPaid).length;
+              final paidCount = payments.where((p) => p.isPaid).length;
               final unpaidCount = payments.length - paidCount;
               final totalCollected = paidCount * iqub.contributionAmount;
 
@@ -77,8 +68,7 @@ class PaymentsScreen extends ConsumerWidget {
                         Expanded(
                           child: StatsCard(
                             label: 'Collected',
-                            value:
-                                'ETB ${totalCollected.toStringAsFixed(0)}',
+                            value: 'ETB ${totalCollected.toStringAsFixed(0)}',
                             icon: Icons.check_circle_rounded,
                             color: AppColors.success,
                           ),
@@ -99,8 +89,7 @@ class PaymentsScreen extends ConsumerWidget {
                   // ── Payments list ────────────────────────────────
                   Expanded(
                     child: ListView.builder(
-                      padding:
-                          const EdgeInsets.fromLTRB(16, 12, 16, 80),
+                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 80),
                       itemCount: payments.length,
                       itemBuilder: (context, i) {
                         final payment = payments[i];
@@ -109,7 +98,11 @@ class PaymentsScreen extends ConsumerWidget {
                           isAdmin: isAdmin,
                           onToggle: isAdmin
                               ? () => _togglePayment(
-                                  context, ref, payment.isPaid, payment.id)
+                                  context,
+                                  ref,
+                                  payment.isPaid,
+                                  payment.id,
+                                )
                               : null,
                         );
                       },
@@ -124,8 +117,12 @@ class PaymentsScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _togglePayment(BuildContext context, WidgetRef ref,
-      bool currentlyPaid, String paymentId) async {
+  Future<void> _togglePayment(
+    BuildContext context,
+    WidgetRef ref,
+    bool currentlyPaid,
+    String paymentId,
+  ) async {
     bool success;
     if (currentlyPaid) {
       success = await ref
@@ -140,11 +137,13 @@ class PaymentsScreen extends ConsumerWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(success
-              ? currentlyPaid
-                  ? 'Marked as unpaid.'
-                  : 'Payment confirmed!'
-              : 'Action failed.'),
+          content: Text(
+            success
+                ? currentlyPaid
+                      ? 'Marked as unpaid.'
+                      : 'Payment confirmed!'
+                : 'Action failed.',
+          ),
           backgroundColor: success ? AppColors.success : AppColors.error,
         ),
       );
@@ -185,13 +184,18 @@ class _GeneratePaymentsView extends ConsumerWidget {
                 color: AppColors.primary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.payment_rounded,
-                  color: AppColors.primary, size: 36),
+              child: const Icon(
+                Icons.payment_rounded,
+                color: AppColors.primary,
+                size: 36,
+              ),
             ),
             const SizedBox(height: 20),
-            Text('No payments yet for Round $round',
-                style: Theme.of(context).textTheme.titleLarge,
-                textAlign: TextAlign.center),
+            Text(
+              'No payments yet for Round $round',
+              style: Theme.of(context).textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
             Text(
               'Generate payment records for all ${members.length} members.',
@@ -214,15 +218,18 @@ class _GeneratePaymentsView extends ConsumerWidget {
                               roundNumber: round,
                               members: members,
                               amount: contributionAmount,
-                              dueDate: DateTime.now()
-                                  .add(const Duration(days: 7)),
+                              dueDate: DateTime.now().add(
+                                const Duration(days: 7),
+                              ),
                             );
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(success
-                                  ? 'Payment records created!'
-                                  : 'Failed to generate payments.'),
+                              content: Text(
+                                success
+                                    ? 'Payment records created!'
+                                    : 'Failed to generate payments.',
+                              ),
                               backgroundColor: success
                                   ? AppColors.success
                                   : AppColors.error,

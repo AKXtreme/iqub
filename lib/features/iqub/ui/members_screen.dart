@@ -21,15 +21,13 @@ class MembersScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final iqubAsync = ref.watch(iqubProvider(iqubId));
     final membersAsync = ref.watch(membersProvider(iqubId));
-    final currentUserId =
-        ref.watch(authStateProvider).valueOrNull?.uid ?? '';
+    final currentUserId = ref.watch(authStateProvider).valueOrNull?.uid ?? '';
 
     return Scaffold(
       appBar: AppBar(title: const Text('Members')),
       body: iqubAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) =>
-            const ErrorView(message: 'Failed to load Iqub.'),
+        error: (e, _) => const ErrorView(message: 'Failed to load Iqub.'),
         data: (iqub) {
           if (iqub == null) {
             return const ErrorView(message: 'Iqub not found.');
@@ -40,33 +38,31 @@ class MembersScreen extends ConsumerWidget {
           return Column(
             children: [
               // Add member form (admin only)
-              if (isAdmin)
-                _AddMemberForm(
-                  iqubId: iqubId,
-                  iqub: iqub,
-                ),
+              if (isAdmin) _AddMemberForm(iqubId: iqubId, iqub: iqub),
 
               // Members list
               Expanded(
                 child: membersAsync.when(
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  error: (e, _) => const ErrorView(
-                    message: 'Failed to load members.',
-                  ),
+                  error: (e, _) =>
+                      const ErrorView(message: 'Failed to load members.'),
                   data: (members) {
                     if (members.isEmpty) {
                       return Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.group_off_outlined,
-                                size: 48, color: AppColors.textSecondary),
+                            const Icon(
+                              Icons.group_off_outlined,
+                              size: 48,
+                              color: AppColors.textSecondary,
+                            ),
                             const SizedBox(height: 12),
-                            Text('No members yet',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium),
+                            Text(
+                              'No members yet',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ],
                         ),
                       );
@@ -81,11 +77,12 @@ class MembersScreen extends ConsumerWidget {
                           member: member,
                           isCurrentPayout:
                               member.id == iqub.currentPayoutMemberId,
-                          showRemove: isAdmin &&
+                          showRemove:
+                              isAdmin &&
                               iqub.status == IqubStatus.active &&
                               iqub.currentRound == 1,
-                          onRemove: () => _confirmRemove(
-                              context, ref, iqub, member),
+                          onRemove: () =>
+                              _confirmRemove(context, ref, iqub, member),
                         );
                       },
                     );
@@ -99,8 +96,12 @@ class MembersScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _confirmRemove(BuildContext context, WidgetRef ref,
-      IqubModel iqub, MemberModel member) async {
+  Future<void> _confirmRemove(
+    BuildContext context,
+    WidgetRef ref,
+    IqubModel iqub,
+    MemberModel member,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
@@ -113,8 +114,10 @@ class MembersScreen extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Remove',
-                style: TextStyle(color: AppColors.error)),
+            child: const Text(
+              'Remove',
+              style: TextStyle(color: AppColors.error),
+            ),
           ),
         ],
       ),
@@ -129,9 +132,9 @@ class MembersScreen extends ConsumerWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(success
-              ? '${member.name} removed.'
-              : 'Failed to remove member.'),
+          content: Text(
+            success ? '${member.name} removed.' : 'Failed to remove member.',
+          ),
           backgroundColor: success ? AppColors.success : AppColors.error,
         ),
       );
@@ -165,12 +168,13 @@ class _AddMemberFormState extends ConsumerState<_AddMemberForm> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final success =
-        await ref.read(iqubActionsProvider.notifier).addMember(
-              iqubId: widget.iqubId,
-              name: _nameCtrl.text.trim(),
-              phone: _phoneCtrl.text.trim(),
-            );
+    final success = await ref
+        .read(iqubActionsProvider.notifier)
+        .addMember(
+          iqubId: widget.iqubId,
+          name: _nameCtrl.text.trim(),
+          phone: _phoneCtrl.text.trim(),
+        );
 
     if (!mounted) return;
 
@@ -218,11 +222,15 @@ class _AddMemberFormState extends ConsumerState<_AddMemberForm> {
               behavior: HitTestBehavior.opaque,
               child: Row(
                 children: [
-                  const Icon(Icons.person_add_outlined,
-                      color: AppColors.primary),
+                  const Icon(
+                    Icons.person_add_outlined,
+                    color: AppColors.primary,
+                  ),
                   const SizedBox(width: 10),
-                  Text('Add New Member',
-                      style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    'Add New Member',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                   const Spacer(),
                   Icon(
                     _isExpanded

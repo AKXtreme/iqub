@@ -76,7 +76,9 @@ class MemberTile extends StatelessWidget {
                       const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 2),
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.primary,
                           borderRadius: BorderRadius.circular(20),
@@ -84,16 +86,20 @@ class MemberTile extends StatelessWidget {
                         child: const Text(
                           'Next payout',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600),
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
                     if (member.hasReceivedPayout) ...[
                       const SizedBox(width: 8),
-                      const Icon(Icons.check_circle_rounded,
-                          color: AppColors.success, size: 16),
+                      const Icon(
+                        Icons.check_circle_rounded,
+                        color: AppColors.success,
+                        size: 16,
+                      ),
                     ],
                   ],
                 ),
@@ -109,8 +115,11 @@ class MemberTile extends StatelessWidget {
           // Remove button
           if (showRemove && onRemove != null)
             IconButton(
-              icon: const Icon(Icons.remove_circle_outline,
-                  color: AppColors.error, size: 20),
+              icon: const Icon(
+                Icons.remove_circle_outline,
+                color: AppColors.error,
+                size: 20,
+              ),
               onPressed: onRemove,
               tooltip: 'Remove member',
             ),

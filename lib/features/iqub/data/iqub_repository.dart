@@ -45,9 +45,10 @@ class IqubRepository {
 
   /// Stream of a single Iqub group
   Stream<IqubModel?> watchIqub(String iqubId) {
-    return _iqubs.doc(iqubId).snapshots().map(
-          (doc) => doc.exists ? IqubModel.fromDoc(doc) : null,
-        );
+    return _iqubs
+        .doc(iqubId)
+        .snapshots()
+        .map((doc) => doc.exists ? IqubModel.fromDoc(doc) : null);
   }
 
   /// Create a new Iqub group. The creator is added as the first member.
@@ -134,7 +135,8 @@ class IqubRepository {
     final member = MemberModel(
       id: memberId,
       iqubId: iqubId,
-      userId: userId ?? memberId, // fallback to memberId if not a registered user
+      userId:
+          userId ?? memberId, // fallback to memberId if not a registered user
       name: name,
       phone: phone,
       payoutPosition: position,
@@ -176,7 +178,9 @@ class IqubRepository {
 
   /// Stream of all payments for a specific round
   Stream<List<PaymentModel>> watchPaymentsForRound(
-      String iqubId, int roundNumber) {
+    String iqubId,
+    int roundNumber,
+  ) {
     return _payments(iqubId)
         .where('roundNumber', isEqualTo: roundNumber)
         .snapshots()
@@ -229,10 +233,9 @@ class IqubRepository {
 
   /// Mark a payment as unpaid (undo)
   Future<void> markPaymentUnpaid(String iqubId, String paymentId) async {
-    await _payments(iqubId).doc(paymentId).update({
-      'isPaid': false,
-      'paidAt': null,
-    });
+    await _payments(
+      iqubId,
+    ).doc(paymentId).update({'isPaid': false, 'paidAt': null});
   }
 
   // ── Payout operations ─────────────────────────────────────────────────────────
@@ -274,8 +277,9 @@ class IqubRepository {
 
     // Advance round; mark completed if this was the last round
     final nextRound = iqub.currentRound + 1;
-    final newStatus =
-        nextRound > iqub.totalRounds ? IqubStatus.completed : IqubStatus.active;
+    final newStatus = nextRound > iqub.totalRounds
+        ? IqubStatus.completed
+        : IqubStatus.active;
 
     batch.update(_iqubs.doc(iqub.id), {
       'currentRound': nextRound,

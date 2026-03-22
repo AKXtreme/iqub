@@ -160,13 +160,15 @@ class _RoundGroupState extends State<_RoundGroup> {
                 ),
               ),
             ),
-            title: Text('Round ${widget.round}',
-                style: Theme.of(context).textTheme.titleMedium),
+            title: Text(
+              'Round ${widget.round}',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             subtitle: Text(
               '${widget.paidCount}/${widget.payments.length} paid',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: allPaid ? AppColors.success : AppColors.warning,
-                  ),
+                color: allPaid ? AppColors.success : AppColors.warning,
+              ),
             ),
             trailing: Icon(
               _expanded
@@ -189,19 +191,21 @@ class _RoundGroupState extends State<_RoundGroup> {
                   color: p.isPaid ? AppColors.success : AppColors.error,
                   size: 20,
                 ),
-                title: Text(p.memberName,
-                    style: Theme.of(context).textTheme.bodyLarge),
+                title: Text(
+                  p.memberName,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
                 subtitle: p.isPaid && p.paidAt != null
-                    ? Text(p.paidAt!.relative,
-                        style: Theme.of(context).textTheme.bodyMedium)
+                    ? Text(
+                        p.paidAt!.relative,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      )
                     : null,
                 trailing: Text(
                   'ETB ${p.amount.toStringAsFixed(0)}',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: p.isPaid
-                            ? AppColors.success
-                            : AppColors.textPrimary,
-                      ),
+                    color: p.isPaid ? AppColors.success : AppColors.textPrimary,
+                  ),
                 ),
               ),
             ),
@@ -237,8 +241,7 @@ class _PayoutsHistoryTab extends ConsumerWidget {
         return ListView.builder(
           padding: const EdgeInsets.all(16),
           itemCount: payouts.length,
-          itemBuilder: (context, i) =>
-              _PayoutCard(payout: payouts[i]),
+          itemBuilder: (context, i) => _PayoutCard(payout: payouts[i]),
         );
       },
     );
@@ -268,16 +271,21 @@ class _PayoutCard extends StatelessWidget {
               color: AppColors.success.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(Icons.account_balance_wallet_rounded,
-                color: AppColors.success, size: 22),
+            child: const Icon(
+              Icons.account_balance_wallet_rounded,
+              color: AppColors.success,
+              size: 22,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(payout.memberName,
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  payout.memberName,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 2),
                 Text(
                   'Round ${payout.roundNumber} • ${payout.payoutDate.formatted}',
@@ -289,9 +297,9 @@ class _PayoutCard extends StatelessWidget {
           Text(
             'ETB ${NumberFormat('#,###').format(payout.amount)}',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.success,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: AppColors.success,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

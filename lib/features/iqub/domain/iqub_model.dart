@@ -97,29 +97,27 @@ class IqubModel extends Equatable {
         (s) => s.name == data['status'],
         orElse: () => IqubStatus.active,
       ),
-      startDate:
-          (data['startDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      createdAt:
-          (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      startDate: (data['startDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       description: data['description'] as String?,
     );
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'name': name,
-        'adminId': adminId,
-        'contributionAmount': contributionAmount,
-        'frequency': frequency.name,
-        'totalRounds': totalRounds,
-        'currentRound': currentRound,
-        'memberIds': memberIds,
-        'payoutOrder': payoutOrder,
-        'status': status.name,
-        'startDate': Timestamp.fromDate(startDate),
-        'createdAt': Timestamp.fromDate(createdAt),
-        'description': description,
-      };
+    'id': id,
+    'name': name,
+    'adminId': adminId,
+    'contributionAmount': contributionAmount,
+    'frequency': frequency.name,
+    'totalRounds': totalRounds,
+    'currentRound': currentRound,
+    'memberIds': memberIds,
+    'payoutOrder': payoutOrder,
+    'status': status.name,
+    'startDate': Timestamp.fromDate(startDate),
+    'createdAt': Timestamp.fromDate(createdAt),
+    'description': description,
+  };
 
   IqubModel copyWith({
     String? name,
@@ -132,27 +130,36 @@ class IqubModel extends Equatable {
     IqubStatus? status,
     DateTime? startDate,
     String? description,
-  }) =>
-      IqubModel(
-        id: id,
-        name: name ?? this.name,
-        adminId: adminId,
-        contributionAmount: contributionAmount ?? this.contributionAmount,
-        frequency: frequency ?? this.frequency,
-        totalRounds: totalRounds ?? this.totalRounds,
-        currentRound: currentRound ?? this.currentRound,
-        memberIds: memberIds ?? this.memberIds,
-        payoutOrder: payoutOrder ?? this.payoutOrder,
-        status: status ?? this.status,
-        startDate: startDate ?? this.startDate,
-        createdAt: createdAt,
-        description: description ?? this.description,
-      );
+  }) => IqubModel(
+    id: id,
+    name: name ?? this.name,
+    adminId: adminId,
+    contributionAmount: contributionAmount ?? this.contributionAmount,
+    frequency: frequency ?? this.frequency,
+    totalRounds: totalRounds ?? this.totalRounds,
+    currentRound: currentRound ?? this.currentRound,
+    memberIds: memberIds ?? this.memberIds,
+    payoutOrder: payoutOrder ?? this.payoutOrder,
+    status: status ?? this.status,
+    startDate: startDate ?? this.startDate,
+    createdAt: createdAt,
+    description: description ?? this.description,
+  );
 
   @override
   List<Object?> get props => [
-        id, name, adminId, contributionAmount, frequency,
-        totalRounds, currentRound, memberIds, payoutOrder,
-        status, startDate, createdAt, description,
-      ];
+    id,
+    name,
+    adminId,
+    contributionAmount,
+    frequency,
+    totalRounds,
+    currentRound,
+    memberIds,
+    payoutOrder,
+    status,
+    startDate,
+    createdAt,
+    description,
+  ];
 }

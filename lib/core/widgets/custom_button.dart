@@ -43,17 +43,17 @@ class CustomButton extends StatelessWidget {
 
     final button = switch (variant) {
       ButtonVariant.primary => ElevatedButton(
-          onPressed: isLoading ? null : onPressed,
-          child: child,
-        ),
+        onPressed: isLoading ? null : onPressed,
+        child: child,
+      ),
       ButtonVariant.outlined => OutlinedButton(
-          onPressed: isLoading ? null : onPressed,
-          child: child,
-        ),
+        onPressed: isLoading ? null : onPressed,
+        child: child,
+      ),
       ButtonVariant.text => TextButton(
-          onPressed: isLoading ? null : onPressed,
-          child: child,
-        ),
+        onPressed: isLoading ? null : onPressed,
+        child: child,
+      ),
     };
 
     if (fullWidth) {

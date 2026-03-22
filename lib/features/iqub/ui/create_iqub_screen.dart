@@ -48,7 +48,9 @@ class _CreateIqubScreenState extends ConsumerState<CreateIqubScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final iqub = await ref.read(iqubActionsProvider.notifier).createIqub(
+    final iqub = await ref
+        .read(iqubActionsProvider.notifier)
+        .createIqub(
           name: _nameCtrl.text.trim(),
           contributionAmount: double.parse(_amountCtrl.text.trim()),
           frequency: _frequency,
@@ -129,8 +131,9 @@ class _CreateIqubScreenState extends ConsumerState<CreateIqubScreen> {
                 label: 'Contribution Amount (ETB)',
                 controller: _amountCtrl,
                 hint: '1000',
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
@@ -140,8 +143,10 @@ class _CreateIqubScreenState extends ConsumerState<CreateIqubScreen> {
               const SizedBox(height: 16),
 
               // Frequency selector
-              Text('Payout Frequency',
-                  style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                'Payout Frequency',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const SizedBox(height: 8),
               _FrequencySelector(
                 selected: _frequency,
@@ -172,10 +177,9 @@ class _CreateIqubScreenState extends ConsumerState<CreateIqubScreen> {
               Text(
                 'You can add members after creating the group.',
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontSize: 12),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(fontSize: 12),
               ),
               const SizedBox(height: 20),
             ],
@@ -195,18 +199,15 @@ class _SectionLabel extends StatelessWidget {
     return Text(
       text,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: AppColors.primary,
-            fontWeight: FontWeight.w600,
-          ),
+        color: AppColors.primary,
+        fontWeight: FontWeight.w600,
+      ),
     );
   }
 }
 
 class _FrequencySelector extends StatelessWidget {
-  const _FrequencySelector({
-    required this.selected,
-    required this.onChanged,
-  });
+  const _FrequencySelector({required this.selected, required this.onChanged});
 
   final IqubFrequency selected;
   final ValueChanged<IqubFrequency> onChanged;
@@ -234,8 +235,7 @@ class _FrequencySelector extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: isSelected ? Colors.white : AppColors.textSecondary,
-                  fontWeight:
-                      isSelected ? FontWeight.w600 : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                   fontSize: 13,
                 ),
               ),
@@ -260,8 +260,7 @@ class _DatePickerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatted =
-        '${date.day}/${date.month}/${date.year}';
+    final formatted = '${date.day}/${date.month}/${date.year}';
 
     return GestureDetector(
       onTap: onTap,
@@ -274,24 +273,29 @@ class _DatePickerTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(Icons.calendar_today_outlined,
-                color: AppColors.textSecondary, size: 20),
+            const Icon(
+              Icons.calendar_today_outlined,
+              color: AppColors.textSecondary,
+              size: 20,
+            ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(fontSize: 12)),
-                Text(formatted,
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  label,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontSize: 12),
+                ),
+                Text(formatted, style: Theme.of(context).textTheme.titleMedium),
               ],
             ),
             const Spacer(),
-            const Icon(Icons.chevron_right_rounded,
-                color: AppColors.textSecondary),
+            const Icon(
+              Icons.chevron_right_rounded,
+              color: AppColors.textSecondary,
+            ),
           ],
         ),
       ),

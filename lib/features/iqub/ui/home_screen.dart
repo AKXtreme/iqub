@@ -23,19 +23,16 @@ class HomeScreen extends ConsumerWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Iqub Manager',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('Iqub Manager', style: Theme.of(context).textTheme.titleLarge),
             userAsync.whenOrNull(
-              data: (user) => Text(
-                user?.name ?? '',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontSize: 12),
-              ),
-            ) ?? const SizedBox.shrink(),
+                  data: (user) => Text(
+                    user?.name ?? '',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(fontSize: 12),
+                  ),
+                ) ??
+                const SizedBox.shrink(),
           ],
         ),
         actions: [
@@ -189,8 +186,11 @@ class _EmptyState extends StatelessWidget {
                 color: AppColors.primary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.savings_rounded,
-                  color: AppColors.primary, size: 40),
+              child: const Icon(
+                Icons.savings_rounded,
+                color: AppColors.primary,
+                size: 40,
+              ),
             ),
             const SizedBox(height: 24),
             Text(

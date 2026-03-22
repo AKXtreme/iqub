@@ -9,14 +9,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Firebase before running the app
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
     // ProviderScope is required at the root for Riverpod to work
-    const ProviderScope(
-      child: IqubApp(),
-    ),
+    const ProviderScope(child: IqubApp()),
   );
 }

@@ -33,7 +33,8 @@ final routerProvider = Provider<GoRouter>((ref) {
     initialLocation: AppRoutes.home,
     redirect: (context, state) {
       final isLoggedIn = authState.valueOrNull != null;
-      final isAuthRoute = state.matchedLocation == AppRoutes.login ||
+      final isAuthRoute =
+          state.matchedLocation == AppRoutes.login ||
           state.matchedLocation == AppRoutes.register;
 
       if (!isLoggedIn && !isAuthRoute) return AppRoutes.login;
@@ -41,33 +42,25 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
-      GoRoute(
-        path: AppRoutes.login,
-        builder: (ctx, _) => const LoginScreen(),
-      ),
+      GoRoute(path: AppRoutes.login, builder: (ctx, _) => const LoginScreen()),
       GoRoute(
         path: AppRoutes.register,
         builder: (ctx, _) => const RegisterScreen(),
       ),
-      GoRoute(
-        path: AppRoutes.home,
-        builder: (ctx, _) => const HomeScreen(),
-      ),
+      GoRoute(path: AppRoutes.home, builder: (ctx, _) => const HomeScreen()),
       GoRoute(
         path: AppRoutes.createIqub,
         builder: (ctx, _) => const CreateIqubScreen(),
       ),
       GoRoute(
         path: AppRoutes.iqubDetail,
-        builder: (_, state) => IqubDetailScreen(
-          iqubId: state.pathParameters['id']!,
-        ),
+        builder: (_, state) =>
+            IqubDetailScreen(iqubId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: AppRoutes.members,
-        builder: (_, state) => MembersScreen(
-          iqubId: state.pathParameters['id']!,
-        ),
+        builder: (_, state) =>
+            MembersScreen(iqubId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: AppRoutes.payments,
@@ -78,15 +71,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.history,
-        builder: (_, state) => HistoryScreen(
-          iqubId: state.pathParameters['id']!,
-        ),
+        builder: (_, state) =>
+            HistoryScreen(iqubId: state.pathParameters['id']!),
       ),
     ],
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Text('Page not found: ${state.error}'),
-      ),
-    ),
+    errorBuilder: (context, state) =>
+        Scaffold(body: Center(child: Text('Page not found: ${state.error}'))),
   );
 });

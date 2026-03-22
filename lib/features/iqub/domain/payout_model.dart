@@ -36,23 +36,30 @@ class PayoutModel extends Equatable {
       memberName: data['memberName'] as String? ?? '',
       roundNumber: data['roundNumber'] as int? ?? 0,
       amount: (data['amount'] as num?)?.toDouble() ?? 0,
-      payoutDate: (data['payoutDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      payoutDate:
+          (data['payoutDate'] as Timestamp?)?.toDate() ?? DateTime.now(),
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'iqubId': iqubId,
-        'memberId': memberId,
-        'memberName': memberName,
-        'roundNumber': roundNumber,
-        'amount': amount,
-        'payoutDate': Timestamp.fromDate(payoutDate),
-        'createdAt': Timestamp.fromDate(createdAt),
-      };
+    'id': id,
+    'iqubId': iqubId,
+    'memberId': memberId,
+    'memberName': memberName,
+    'roundNumber': roundNumber,
+    'amount': amount,
+    'payoutDate': Timestamp.fromDate(payoutDate),
+    'createdAt': Timestamp.fromDate(createdAt),
+  };
 
   @override
-  List<Object?> get props =>
-      [id, iqubId, memberId, roundNumber, amount, payoutDate];
+  List<Object?> get props => [
+    id,
+    iqubId,
+    memberId,
+    roundNumber,
+    amount,
+    payoutDate,
+  ];
 }

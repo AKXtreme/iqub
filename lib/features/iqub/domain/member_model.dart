@@ -44,34 +44,41 @@ class MemberModel extends Equatable {
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'iqubId': iqubId,
-        'userId': userId,
-        'name': name,
-        'phone': phone,
-        'payoutPosition': payoutPosition,
-        'hasReceivedPayout': hasReceivedPayout,
-        'joinedAt': Timestamp.fromDate(joinedAt),
-      };
+    'id': id,
+    'iqubId': iqubId,
+    'userId': userId,
+    'name': name,
+    'phone': phone,
+    'payoutPosition': payoutPosition,
+    'hasReceivedPayout': hasReceivedPayout,
+    'joinedAt': Timestamp.fromDate(joinedAt),
+  };
 
   MemberModel copyWith({
     String? name,
     String? phone,
     int? payoutPosition,
     bool? hasReceivedPayout,
-  }) =>
-      MemberModel(
-        id: id,
-        iqubId: iqubId,
-        userId: userId,
-        name: name ?? this.name,
-        phone: phone ?? this.phone,
-        payoutPosition: payoutPosition ?? this.payoutPosition,
-        hasReceivedPayout: hasReceivedPayout ?? this.hasReceivedPayout,
-        joinedAt: joinedAt,
-      );
+  }) => MemberModel(
+    id: id,
+    iqubId: iqubId,
+    userId: userId,
+    name: name ?? this.name,
+    phone: phone ?? this.phone,
+    payoutPosition: payoutPosition ?? this.payoutPosition,
+    hasReceivedPayout: hasReceivedPayout ?? this.hasReceivedPayout,
+    joinedAt: joinedAt,
+  );
 
   @override
-  List<Object?> get props =>
-      [id, iqubId, userId, name, phone, payoutPosition, hasReceivedPayout, joinedAt];
+  List<Object?> get props => [
+    id,
+    iqubId,
+    userId,
+    name,
+    phone,
+    payoutPosition,
+    hasReceivedPayout,
+    joinedAt,
+  ];
 }

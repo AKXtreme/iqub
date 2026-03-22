@@ -5,13 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 class AppColors {
   AppColors._();
 
-  static const primary = Color(0xFF1A56DB);       // Deep blue
+  static const primary = Color(0xFF1A56DB); // Deep blue
   static const primaryLight = Color(0xFF76A9FA);
-  static const secondary = Color(0xFF0EA5E9);      // Sky blue
-  static const success = Color(0xFF10B981);        // Emerald green
-  static const warning = Color(0xFFF59E0B);        // Amber
-  static const error = Color(0xFFEF4444);          // Red
-  static const background = Color(0xFFF8FAFC);     // Off-white
+  static const secondary = Color(0xFF0EA5E9); // Sky blue
+  static const success = Color(0xFF10B981); // Emerald green
+  static const warning = Color(0xFFF59E0B); // Amber
+  static const error = Color(0xFFEF4444); // Red
+  static const background = Color(0xFFF8FAFC); // Off-white
   static const surface = Color(0xFFFFFFFF);
   static const textPrimary = Color(0xFF1E293B);
   static const textSecondary = Color(0xFF64748B);
@@ -39,28 +39,42 @@ class AppTheme {
     return base.copyWith(
       textTheme: GoogleFonts.poppinsTextTheme(base.textTheme).copyWith(
         headlineLarge: GoogleFonts.poppins(
-          fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.textPrimary,
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textPrimary,
         ),
         headlineMedium: GoogleFonts.poppins(
-          fontSize: 22, fontWeight: FontWeight.w600, color: AppColors.textPrimary,
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
         ),
         headlineSmall: GoogleFonts.poppins(
-          fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textPrimary,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
         ),
         titleLarge: GoogleFonts.poppins(
-          fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
         ),
         titleMedium: GoogleFonts.poppins(
-          fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.textPrimary,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textPrimary,
         ),
         bodyLarge: GoogleFonts.poppins(
-          fontSize: 15, color: AppColors.textPrimary,
+          fontSize: 15,
+          color: AppColors.textPrimary,
         ),
         bodyMedium: GoogleFonts.poppins(
-          fontSize: 13, color: AppColors.textSecondary,
+          fontSize: 13,
+          color: AppColors.textSecondary,
         ),
         labelLarge: GoogleFonts.poppins(
-          fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
         ),
       ),
       appBarTheme: AppBarTheme(
@@ -90,9 +104,12 @@ class AppTheme {
           foregroundColor: Colors.white,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           textStyle: GoogleFonts.poppins(
-            fontSize: 14, fontWeight: FontWeight.w600,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
@@ -101,16 +118,22 @@ class AppTheme {
           foregroundColor: AppColors.primary,
           side: const BorderSide(color: AppColors.primary),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           textStyle: GoogleFonts.poppins(
-            fontSize: 14, fontWeight: FontWeight.w600,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.divider),
@@ -127,8 +150,14 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error),
         ),
-        labelStyle: GoogleFonts.poppins(fontSize: 13, color: AppColors.textSecondary),
-        hintStyle: GoogleFonts.poppins(fontSize: 13, color: AppColors.textSecondary),
+        labelStyle: GoogleFonts.poppins(
+          fontSize: 13,
+          color: AppColors.textSecondary,
+        ),
+        hintStyle: GoogleFonts.poppins(
+          fontSize: 13,
+          color: AppColors.textSecondary,
+        ),
       ),
       dividerTheme: const DividerThemeData(
         color: AppColors.divider,

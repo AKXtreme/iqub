@@ -20,7 +20,11 @@ class LoadingOverlay extends StatelessWidget {
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(16),
               boxShadow: const [
-                BoxShadow(color: AppColors.cardShadow, blurRadius: 20, spreadRadius: 4),
+                BoxShadow(
+                  color: AppColors.cardShadow,
+                  blurRadius: 20,
+                  spreadRadius: 4,
+                ),
               ],
             ),
             child: Column(

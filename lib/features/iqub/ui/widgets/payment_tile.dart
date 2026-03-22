@@ -64,9 +64,9 @@ class PaymentTile extends StatelessWidget {
                       ? 'Paid ${payment.paidAt?.relative ?? ''}'
                       : 'Due ${payment.dueDate.formatted}',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: isPaid ? AppColors.success : AppColors.error,
-                        fontSize: 12,
-                      ),
+                    color: isPaid ? AppColors.success : AppColors.error,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
@@ -79,10 +79,9 @@ class PaymentTile extends StatelessWidget {
               Text(
                 'ETB ${payment.amount.toStringAsFixed(0)}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color:
-                          isPaid ? AppColors.success : AppColors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: isPaid ? AppColors.success : AppColors.textPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               // Toggle paid/unpaid (admin only)
               if (isAdmin && onToggle != null)

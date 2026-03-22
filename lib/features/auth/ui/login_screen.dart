@@ -32,10 +32,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    await ref.read(authNotifierProvider.notifier).signIn(
-          email: _emailCtrl.text,
-          password: _passCtrl.text,
-        );
+    await ref
+        .read(authNotifierProvider.notifier)
+        .signIn(email: _emailCtrl.text, password: _passCtrl.text);
 
     if (!mounted) return;
     final state = ref.read(authNotifierProvider);
@@ -62,8 +61,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading =
-        ref.watch(authNotifierProvider).isLoading;
+    final isLoading = ref.watch(authNotifierProvider).isLoading;
 
     return Scaffold(
       body: SafeArea(
@@ -84,15 +82,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Icon(Icons.savings_rounded,
-                      color: Colors.white, size: 32),
+                  child: const Icon(
+                    Icons.savings_rounded,
+                    color: Colors.white,
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(height: 24),
-                Text('Welcome back',
-                    style: Theme.of(context).textTheme.headlineMedium),
+                Text(
+                  'Welcome back',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
                 const SizedBox(height: 6),
-                Text('Sign in to manage your Iqub groups',
-                    style: Theme.of(context).textTheme.bodyMedium),
+                Text(
+                  'Sign in to manage your Iqub groups',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 const SizedBox(height: 40),
 
                 // Email
@@ -114,9 +119,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   validator: Validators.password,
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
-                    icon: Icon(_obscurePassword
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined),
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                    ),
                     onPressed: () =>
                         setState(() => _obscurePassword = !_obscurePassword),
                   ),
@@ -135,8 +142,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account? ",
-                        style: Theme.of(context).textTheme.bodyMedium),
+                    Text(
+                      "Don't have an account? ",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     TextButton(
                       onPressed: () => context.go(AppRoutes.register),
                       child: const Text('Register'),

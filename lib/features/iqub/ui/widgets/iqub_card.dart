@@ -6,11 +6,7 @@ import '../../domain/iqub_model.dart';
 
 /// Card displayed in the home screen list for each Iqub group
 class IqubCard extends StatelessWidget {
-  const IqubCard({
-    super.key,
-    required this.iqub,
-    required this.onTap,
-  });
+  const IqubCard({super.key, required this.iqub, required this.onTap});
 
   final IqubModel iqub;
   final VoidCallback onTap;
@@ -73,8 +69,11 @@ class IqubCard extends StatelessWidget {
                     color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.savings_rounded,
-                      color: AppColors.primary, size: 22),
+                  child: const Icon(
+                    Icons.savings_rounded,
+                    color: AppColors.primary,
+                    size: 22,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 // Name + status
@@ -102,9 +101,7 @@ class IqubCard extends StatelessWidget {
                           const SizedBox(width: 4),
                           Text(
                             _statusLabel,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
+                            style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(color: _statusColor, fontSize: 12),
                           ),
                         ],
@@ -112,8 +109,10 @@ class IqubCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Icon(Icons.chevron_right_rounded,
-                    color: AppColors.textSecondary),
+                const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.textSecondary,
+                ),
               ],
             ),
 
@@ -129,15 +128,11 @@ class IqubCard extends StatelessWidget {
                   value: 'ETB ${iqub.contributionAmount.toStringAsFixed(0)}',
                 ),
                 const _Divider(),
-                _StatItem(
-                  label: 'Members',
-                  value: '${iqub.memberIds.length}',
-                ),
+                _StatItem(label: 'Members', value: '${iqub.memberIds.length}'),
                 const _Divider(),
                 _StatItem(
                   label: 'Round',
-                  value:
-                      '${iqub.currentRound} / ${iqub.totalRounds}',
+                  value: '${iqub.currentRound} / ${iqub.totalRounds}',
                 ),
               ],
             ),
@@ -158,9 +153,9 @@ class IqubCard extends StatelessWidget {
                     Text(
                       '${(progress * 100).toStringAsFixed(0)}%',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),
@@ -182,26 +177,30 @@ class IqubCard extends StatelessWidget {
             // Start date
             Row(
               children: [
-                const Icon(Icons.calendar_today_outlined,
-                    size: 13, color: AppColors.textSecondary),
+                const Icon(
+                  Icons.calendar_today_outlined,
+                  size: 13,
+                  color: AppColors.textSecondary,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   'Started ${iqub.startDate.formatted}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(fontSize: 12),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontSize: 12),
                 ),
                 const SizedBox(width: 12),
-                const Icon(Icons.repeat_rounded,
-                    size: 13, color: AppColors.textSecondary),
+                const Icon(
+                  Icons.repeat_rounded,
+                  size: 13,
+                  color: AppColors.textSecondary,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   iqub.frequency.label,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(fontSize: 12),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontSize: 12),
                 ),
               ],
             ),
@@ -225,9 +224,9 @@ class _StatItem extends StatelessWidget {
           Text(
             value,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                ),
+              fontWeight: FontWeight.bold,
+              color: AppColors.textPrimary,
+            ),
           ),
           const SizedBox(height: 2),
           Text(label, style: Theme.of(context).textTheme.bodyMedium),
@@ -242,10 +241,6 @@ class _Divider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 1,
-      height: 32,
-      color: AppColors.divider,
-    );
+    return Container(width: 1, height: 32, color: AppColors.divider);
   }
 }

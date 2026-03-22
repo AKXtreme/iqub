@@ -45,10 +45,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
     );
   }
 
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signIn({required String email, required String password}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
       () => _repo.signIn(email: email, password: password),
@@ -63,5 +60,5 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
 
 final authNotifierProvider =
     StateNotifierProvider<AuthNotifier, AsyncValue<void>>((ref) {
-  return AuthNotifier(ref.watch(authRepositoryProvider));
-});
+      return AuthNotifier(ref.watch(authRepositoryProvider));
+    });

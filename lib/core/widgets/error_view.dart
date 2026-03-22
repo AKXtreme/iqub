@@ -26,10 +26,9 @@ class ErrorView extends StatelessWidget {
           Flexible(
             child: Text(
               message,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: AppColors.error),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.error),
             ),
           ),
         ],
@@ -42,8 +41,11 @@ class ErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline_rounded,
-                size: 56, color: AppColors.error.withValues(alpha: 0.7)),
+            Icon(
+              Icons.error_outline_rounded,
+              size: 56,
+              color: AppColors.error.withValues(alpha: 0.7),
+            ),
             const SizedBox(height: 16),
             Text(
               message,

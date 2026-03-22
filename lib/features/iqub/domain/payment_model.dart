@@ -45,23 +45,19 @@ class PaymentModel extends Equatable {
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'iqubId': iqubId,
-        'memberId': memberId,
-        'memberName': memberName,
-        'roundNumber': roundNumber,
-        'amount': amount,
-        'isPaid': isPaid,
-        'dueDate': Timestamp.fromDate(dueDate),
-        'paidAt': paidAt != null ? Timestamp.fromDate(paidAt!) : null,
-        'note': note,
-      };
+    'id': id,
+    'iqubId': iqubId,
+    'memberId': memberId,
+    'memberName': memberName,
+    'roundNumber': roundNumber,
+    'amount': amount,
+    'isPaid': isPaid,
+    'dueDate': Timestamp.fromDate(dueDate),
+    'paidAt': paidAt != null ? Timestamp.fromDate(paidAt!) : null,
+    'note': note,
+  };
 
-  PaymentModel copyWith({
-    bool? isPaid,
-    DateTime? paidAt,
-    String? note,
-  }) =>
+  PaymentModel copyWith({bool? isPaid, DateTime? paidAt, String? note}) =>
       PaymentModel(
         id: id,
         iqubId: iqubId,
@@ -76,6 +72,14 @@ class PaymentModel extends Equatable {
       );
 
   @override
-  List<Object?> get props =>
-      [id, iqubId, memberId, roundNumber, amount, isPaid, dueDate, paidAt];
+  List<Object?> get props => [
+    id,
+    iqubId,
+    memberId,
+    roundNumber,
+    amount,
+    isPaid,
+    dueDate,
+    paidAt,
+  ];
 }
