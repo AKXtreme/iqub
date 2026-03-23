@@ -54,6 +54,17 @@ class AuthRepository {
     );
   }
 
+  /// Update the current user's display name and phone in Firestore + Auth
+  Future<void> updateProfile({required String name, String? phone}) async {
+    final uid = _auth.currentUser?.uid;
+    if (uid == null) throw Exception('Not authenticated');
+
+    await Future.wait([
+      _auth.currentUser!.updateDisplayName(name.trim()),
+      _users.doc(uid).update({'name': name.trim(), 'phone': phone?.trim()}),
+    ]);
+  }
+
   /// Sign out the current user
   Future<void> signOut() => _auth.signOut();
 

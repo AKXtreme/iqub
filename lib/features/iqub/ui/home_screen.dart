@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app/router.dart';
 import '../../../app/theme.dart';
-import '../../../app/theme_provider.dart';
 import '../../../core/widgets/error_view.dart';
 import '../../../features/auth/providers/auth_provider.dart';
 import '../providers/iqub_provider.dart';
@@ -37,29 +36,40 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          // Dark mode toggle
-          Consumer(
-            builder: (context, ref, _) {
-              final isDark = ref.watch(themeModeProvider);
-              return IconButton(
-                icon: Icon(
-                  isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
-                ),
-                tooltip: isDark ? 'Light mode' : 'Dark mode',
-                onPressed: () => ref.read(themeModeProvider.notifier).toggle(),
-              );
-            },
-          ),
-          // Sign out
-          IconButton(
-            icon: const Icon(Icons.logout_rounded),
-            tooltip: 'Sign out',
-            onPressed: () async {
-              final confirmed = await _confirmSignOut(context);
-              if (confirmed && context.mounted) {
-                await ref.read(authNotifierProvider.notifier).signOut();
-              }
-            },
+          // Profile avatar button
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: GestureDetector(
+              onTap: () => context.push(AppRoutes.profile),
+              child:
+                  userAsync.whenOrNull(
+                    data: (user) {
+                      final initials = (user?.name ?? '')
+                          .trim()
+                          .split(' ')
+                          .take(2)
+                          .map((w) => w.isNotEmpty ? w[0].toUpperCase() : '')
+                          .join();
+                      return CircleAvatar(
+                        radius: 18,
+                        backgroundColor: AppColors.primaryLight,
+                        child: Text(
+                          initials.isEmpty ? '?' : initials,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    },
+                  ) ??
+                  const CircleAvatar(
+                    radius: 18,
+                    backgroundColor: AppColors.primaryLight,
+                    child: Icon(Icons.person, color: Colors.white, size: 18),
+                  ),
+            ),
           ),
         ],
       ),
@@ -109,30 +119,6 @@ class HomeScreen extends ConsumerWidget {
         label: const Text('New Iqub'),
       ),
     );
-  }
-
-  Future<bool> _confirmSignOut(BuildContext context) async {
-    return await showDialog<bool>(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: const Text('Sign out?'),
-            content: const Text('You will be returned to the login screen.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                child: const Text(
-                  'Sign out',
-                  style: TextStyle(color: AppColors.error),
-                ),
-              ),
-            ],
-          ),
-        ) ??
-        false;
   }
 }
 

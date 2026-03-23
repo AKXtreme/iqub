@@ -52,6 +52,14 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
     );
   }
 
+  Future<bool> updateProfile({required String name, String? phone}) async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(
+      () => _repo.updateProfile(name: name, phone: phone),
+    );
+    return !state.hasError;
+  }
+
   Future<void> signOut() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => _repo.signOut());

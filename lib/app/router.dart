@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/auth/providers/auth_provider.dart';
 import '../features/auth/ui/login_screen.dart';
+import '../features/auth/ui/profile_screen.dart';
 import '../features/auth/ui/register_screen.dart';
 import '../features/iqub/ui/create_iqub_screen.dart';
 import '../features/iqub/ui/history_screen.dart';
@@ -23,6 +24,7 @@ class AppRoutes {
   static const members = '/iqub/:id/members';
   static const payments = '/iqub/:id/payments/:round';
   static const history = '/iqub/:id/history';
+  static const profile = '/profile';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -73,6 +75,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.history,
         builder: (_, state) =>
             HistoryScreen(iqubId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: AppRoutes.profile,
+        builder: (ctx, _) => const ProfileScreen(),
       ),
     ],
     errorBuilder: (context, state) =>
