@@ -79,10 +79,6 @@ class IqubActionsNotifier extends StateNotifier<AsyncValue<void>> {
         description: description,
       );
     });
-    if (state.hasError) {
-      // ignore: avoid_print
-      print('[IqubActions] createIqub error: ${state.error}\n${state.stackTrace}');
-    }
     return result;
   }
 
