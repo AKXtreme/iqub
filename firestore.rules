@@ -7,9 +7,13 @@ service cloud.firestore {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
 
-    // Iqub groups: only the admin can read/write
+    // Iqub groups
     match /iqubs/{iqubId} {
-      allow read, write: if request.auth != null && request.auth.uid == resource.data.adminId;
+      // Any member can read their iqubs (required for arrayContains query)
+      allow read: if request.auth != null && request.auth.uid in resource.data.memberIds;
+      // Only admin can update/delete
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.adminId;
+      // Creator must set themselves as admin
       allow create: if request.auth != null && request.auth.uid == request.resource.data.adminId;
 
       // Members sub-collection

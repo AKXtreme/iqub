@@ -66,8 +66,9 @@ class _CreateIqubScreenState extends ConsumerState<CreateIqubScreen> {
     if (state.hasError) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Failed to create Iqub. Please try again.'),
+          content: Text('Error: ${state.error}'),
           backgroundColor: AppColors.error,
+          duration: const Duration(seconds: 8),
         ),
       );
       return;
