@@ -142,6 +142,17 @@ class IqubActionsNotifier extends StateNotifier<AsyncValue<void>> {
     return !state.hasError;
   }
 
+  Future<bool> updatePayoutOrder(
+    String iqubId,
+    List<MemberModel> members,
+  ) async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(
+      () => _repo.updatePayoutOrder(iqubId, members),
+    );
+    return !state.hasError;
+  }
+
   Future<bool> recordPayoutAndAdvance({
     required IqubModel iqub,
     required MemberModel recipient,

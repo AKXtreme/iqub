@@ -11,12 +11,16 @@ class MemberTile extends StatelessWidget {
     required this.isCurrentPayout,
     this.onRemove,
     this.showRemove = false,
+    this.trailing,
   });
 
   final MemberModel member;
   final bool isCurrentPayout;
   final VoidCallback? onRemove;
   final bool showRemove;
+
+  /// Optional widget appended after the remove button (e.g. a drag handle).
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -169,6 +173,8 @@ class MemberTile extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
             ),
+
+          ?trailing,
         ],
       ),
     );

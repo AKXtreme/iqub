@@ -161,6 +161,32 @@ class IqubRepository {
     await batch.commit();
   }
 
+  /// Reorder the payout rotation (admin only, before first payout).
+  ///
+  /// [members] must be the full list in the desired new order.
+  /// Batch-writes the new [payoutOrder] on the iqub doc and updates each
+  /// member's [payoutPosition] field atomically.
+  Future<void> updatePayoutOrder(
+    String iqubId,
+    List<MemberModel> members,
+  ) async {
+    final batch = _db.batch();
+
+    // Update parent iqub document with new ordered list of member IDs
+    batch.update(_iqubs.doc(iqubId), {
+      'payoutOrder': members.map((m) => m.id).toList(),
+    });
+
+    // Update every member's payoutPosition (1-based)
+    for (var i = 0; i < members.length; i++) {
+      batch.update(_members(iqubId).doc(members[i].id), {
+        'payoutPosition': i + 1,
+      });
+    }
+
+    await batch.commit();
+  }
+
   /// Remove a member from the Iqub (admin only, before Iqub starts)
   Future<void> removeMember(String iqubId, MemberModel member) async {
     final batch = _db.batch();
