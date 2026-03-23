@@ -1,18 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app.dart';
+import 'app/theme_provider.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase before running the app
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  final prefs = await SharedPreferences.getInstance();
+
   runApp(
-    // ProviderScope is required at the root for Riverpod to work
-    const ProviderScope(child: IqubApp()),
+    ProviderScope(
+      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+      child: const IqubApp(),
+    ),
   );
 }
